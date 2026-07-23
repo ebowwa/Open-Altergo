@@ -27,9 +27,12 @@ Current sources:
 
 The supplied research set is triaged in
 [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md) and represented as structured
-metadata in [`papers.json`](papers.json). Paper inclusion is not dependency,
-or reproduction approval. The immediate implementation order is in
-[`CAPABILITY_PLAN.md`](CAPABILITY_PLAN.md).
+metadata in [`papers.json`](papers.json). Paper inclusion does not mean a
+dependency has been adopted or a result reproduced. The immediate
+implementation order is in
+[`CAPABILITY_PLAN.md`](CAPABILITY_PLAN.md). Every supplied paper is translated
+into an isolated capability experiment in
+[`PAPER_EXPERIMENTS.md`](PAPER_EXPERIMENTS.md).
 
 This directory is separate from `cloud/engine/src/model_manifest.json`, which
 describes the currently active and pinned inference assets. Promoting a source

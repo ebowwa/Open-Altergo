@@ -7,6 +7,11 @@ reviewed titles and abstracts, not every method appendix, code repository,
 checkpoint, training split, or license. Reported results below remain paper
 claims until reproduced under this repository's evaluation harness.
 
+The code-level implementation sequence is in
+[`CAPABILITY_PLAN.md`](CAPABILITY_PLAN.md). The hypothesis, modules, ablations,
+metrics, controls, and decision for every supplied paper are in
+[`PAPER_EXPERIMENTS.md`](PAPER_EXPERIMENTS.md).
+
 The primary product task is visual-only speech-to-text:
 
 ```text

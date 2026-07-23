@@ -145,6 +145,14 @@
       "priority": "P1",
       "use": "Reproduce pseudo-label scaling, speaker/OOD evaluation, and isolated-word transfer methodology without treating Romanian artifacts as an English backend.",
       "url": "https://arxiv.org/abs/2607.08112"
+    },
+    {
+      "arxiv_id": "2303.08807",
+      "title": "Auto-AVSR: Audio-Visual Speech Recognition with Automatic Labels",
+      "track": "visual-speech-recognition",
+      "priority": "foundational-baseline",
+      "use": "Freeze the architecture, preprocessing, tokenizer, decoder, and automatic-label baseline underlying the current and LRS3 candidate backends.",
+      "url": "https://arxiv.org/abs/2303.08807"
     }
   ]
 }
