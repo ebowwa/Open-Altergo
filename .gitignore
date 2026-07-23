@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.venv/
+
+# Personal recordings and generated training artifacts
+data/
+datasets/
+models/
+checkpoints/
+runs/
+outputs/
+*.ckpt
+*.pt
+*.pth
+
+# Local caches
+.cache/
+.hf-cache/
+.modal/

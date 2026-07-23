@@ -1,0 +1,4 @@
+id,video,text,split
+session01-0001,clips/session01-0001.mp4,hey how is everyone today,train
+session02-0001,clips/session02-0001.mp4,can you tell me the latest with the task,val
+session03-0001,clips/session03-0001.mp4,please send the update when it is ready,test
