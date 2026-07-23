@@ -19,8 +19,11 @@ inference, CI, or a release.
 Current sources:
 
 - [`simonlesaumon/lrs3-lipreader-visual-only`](lrs3-lipreader-visual-only/README.md)
-  — requested LRS3 visual-only candidate; revision, files, and license still
-  require verification.
+  — English visual-only Auto-AVSR candidate; CC-BY-NC-4.0 research-only,
+  awaiting an immutable Hub revision and checksums.
+- [`VSRo-200`](vsro200/README.md) — Romanian sentence VSR, dataset metadata,
+  and LRRo transfer heads; useful for supervision and robustness research, not
+  an active English backend.
 
 The supplied research set is triaged in
 [`RESEARCH_ROADMAP.md`](RESEARCH_ROADMAP.md) and represented as structured

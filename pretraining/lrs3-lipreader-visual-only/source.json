@@ -3,14 +3,54 @@
   "repository_id": "simonlesaumon/lrs3-lipreader-visual-only",
   "repository_type": "model",
   "revision": null,
-  "license": "unverified",
-  "status": "quarantined-until-pinned-and-reviewed",
+  "license": "CC-BY-NC-4.0",
+  "license_source": "upstream model card supplied for review",
+  "commercial_use": false,
+  "status": "research-only-awaiting-immutable-revision-and-checksums",
   "active": false,
-  "expected_files": [],
+  "expected_files": {
+    "model_avg_10.pth": {
+      "role": "average of the last 10 visual-only fine-tuning checkpoints",
+      "format": "PyTorch checkpoint/pickle",
+      "size": null,
+      "sha256": null,
+      "safe_serialization_reviewed": false
+    }
+  },
   "provenance": {
-    "dataset_claim_from_repository_name": "LRS3",
-    "architecture": "unverified",
-    "authors": "unverified",
-    "training_stage": "unverified"
+    "architecture": "Auto-AVSR end-to-end visual-only",
+    "architecture_revision_short": "182b628",
+    "architecture_revision_full": null,
+    "architecture_paper": "https://arxiv.org/abs/2303.08807",
+    "dataset": "Ainncy/LRS3 trainval",
+    "language": "English",
+    "training_stage": "fine-tuned",
+    "reported_parameters": 250000000,
+    "reported_framework": {
+      "pytorch": "2.5.1",
+      "pytorch_lightning": "2.5.0"
+    }
+  },
+  "reported_training": {
+    "epochs": 20,
+    "hardware": "1x NVIDIA A100-SXM4-80GB",
+    "learning_rate": 0.001,
+    "reported_duration": "4h40m",
+    "train_split": "approximately 98% of Ainncy/LRS3 trainval",
+    "validation_split": "deterministic approximately 2% holdout from trainval",
+    "preprocessing": "MediaPipe face detection and mouth ROI crops in 16-second segments"
+  },
+  "limitations": [
+    "Research use only; commercial use is prohibited.",
+    "The reported validation split is not the official LRS3 test set.",
+    "English only.",
+    "Frontal, relatively controlled LRS3 video does not establish real-world performance.",
+    "No speaker diarization.",
+    "The checkpoint is a pickle-capable PyTorch format and must be treated as executable input.",
+    "The model must not be used for surveillance or non-consensual recognition."
+  ],
+  "metadata_evidence": {
+    "kind": "model-card-text-supplied-by-user",
+    "recorded_on": "2026-07-23"
   }
 }

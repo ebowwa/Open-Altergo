@@ -22,9 +22,11 @@ must not be counted as recognizer improvements.
 ### P0 — investigate first
 
 1. **Validate the requested Hugging Face candidate.**
-   `simonlesaumon/lrs3-lipreader-visual-only` may offer a ready LRS3 checkpoint,
-   but its revision, files, architecture, license, and provenance are unresolved.
-   It stays inactive until those are pinned and reviewed.
+   `simonlesaumon/lrs3-lipreader-visual-only` is reported as a 250M-parameter
+   English visual-only Auto-AVSR checkpoint fine-tuned for 20 epochs on an
+   `Ainncy/LRS3` trainval split. Its card declares CC-BY-NC-4.0. It stays
+   inactive until its full Hub revision, files, hashes, preprocessing contract,
+   full architecture commit, and safe-serialization review are complete.
 
 2. **Phoneme-first decoding with an external language model.**
    [VALLR](https://huggingface.co/papers/2503.21408) proposes a Video
@@ -50,6 +52,10 @@ must not be counted as recognizer improvements.
 
 ### P1 — controlled ablations
 
+- [VSRo-200](https://arxiv.org/abs/2607.08112): reproduce its
+  human-label versus pseudo-label scaling protocol, speaker-seen/unseen and OOD
+  splits, and transfer probe design. Its Romanian, CC-BY-NC-4.0 artifacts are
+  research references, not an English production backend.
 - [External viseme decoding](https://huggingface.co/papers/2104.04784):
   compare explicit video-to-viseme and viseme-to-text stages. The abstract
   reports a four-point WER improvement on LRS2 over its stated baseline.
@@ -143,6 +149,20 @@ must never contaminate the held-out real-video test set.
    current engine.
 7. Run identical held-out evaluation and publish the comparison, including
    failures and missing compatibility information.
+
+### R1b — VSRo-200 methodology reproduction
+
+- Reimplement the supervision-quality comparison using an authorized dataset
+  and a pinned English baseline before drawing product conclusions.
+- Preserve speaker-seen, speaker-unseen, and domain-shift splits.
+- Report annotation source, hours, label confidence, OOV token/type rate, WER,
+  CER, and run-to-run variance.
+- Evaluate gender and speaker cohorts only with consent-appropriate metadata;
+  describe coverage and uncertainty without inferring identity from faces.
+- Treat the LRRo MLP as an isolated-word transfer probe, never as evidence of
+  sentence-transcription quality.
+- Do not load the upstream code or checkpoints until code licensing, dependency
+  pins, checksums, and PyTorch serialization review are complete.
 
 ### R2 — phoneme/viseme bottleneck
 

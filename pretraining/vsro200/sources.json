@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "active": false,
+  "sources": [
+    {
+      "id": "github-code",
+      "repository": "https://github.com/vsro200/vsro200",
+      "repository_type": "git",
+      "revision": "267d44ee8fbd2de5b76a05441bb3bcbce838e457",
+      "license": "unverified",
+      "status": "pinned-code-license-blocked",
+      "notes": [
+        "No LICENSE file was found at the pinned revision.",
+        "The setup script shallow-clones an unpinned MultiVSR default branch.",
+        "The setup script downloads an unchecksummed VTP PyTorch checkpoint."
+      ]
+    },
+    {
+      "id": "sentence-models",
+      "repository_id": "vsro200/models-vsro200",
+      "repository_type": "model",
+      "revision": "4195b93fb621b2911fd2d854ca46eea054c735dd",
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "status": "research-only-awaiting-complete-inventory-and-checksums",
+      "language": "Romanian",
+      "architecture": "MultiVSR fine-tuned on VSRo-200",
+      "target_file": {
+        "path": "checkpoints/model_200h_auto.pt",
+        "role": "best reported 200-hour pseudo-label sentence VSR checkpoint",
+        "format": "PyTorch checkpoint/pickle",
+        "size": null,
+        "sha256": null,
+        "safe_serialization_reviewed": false
+      },
+      "reported_test_unseen": {
+        "wer_percent": 48.75,
+        "cer_percent": 27.05
+      },
+      "reported_test_seen": {
+        "wer_percent": 44.54,
+        "cer_percent": 24.51
+      },
+      "metrics_evidence": "VSRo-200 Hugging Face model card snapshot reviewed on 2026-07-23; reproduce before relying on the claims"
+    },
+    {
+      "id": "lrro-mlp-heads",
+      "repository_id": "vsro200/mlp-lrro-vsro200",
+      "repository_type": "model",
+      "revision": null,
+      "license": "unverified",
+      "status": "quarantined-until-pinned-licensed-and-hashed",
+      "language": "Romanian",
+      "task": "isolated-word classification",
+      "architecture": "attention pooling plus MLP over frozen VSRo-200 representations",
+      "expected_files": [
+        "64_bottom/best_lab_clf.pt",
+        "64_bottom/best_wild_clf.pt",
+        "64_middle/best_lab_clf.pt",
+        "64_middle/best_wild_clf.pt",
+        "96_resize/best_lab_clf.pt",
+        "96_resize/best_wild_clf.pt"
+      ]
+    },
+    {
+      "id": "dataset-metadata",
+      "repository_id": "vsro200/vsro200",
+      "repository_type": "dataset",
+      "revision": null,
+      "license": "CC-BY-NC-4.0",
+      "commercial_use": false,
+      "status": "research-only-awaiting-immutable-revision-and-inventory",
+      "language": "Romanian",
+      "reported_rows": 98315,
+      "reported_size_bytes": 21100000,
+      "notes": [
+        "The Hub viewer exposes tabular timestamp/transcript metadata.",
+        "Media reconstruction and original-source rights require separate review.",
+        "Do not commit reconstructed media or LRRo data."
+      ]
+    }
+  ],
+  "paper": {
+    "arxiv_id": "2607.08112",
+    "title": "VSRo-200: A Romanian Visual Speech Recognition Dataset for Studying Supervision and Multimodal Robustness",
+    "url": "https://arxiv.org/abs/2607.08112"
+  }
+}

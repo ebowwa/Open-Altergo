@@ -137,6 +137,14 @@
       "priority": "adjacent",
       "use": "Reference for discrete visual speech semantics; primary task requires audio.",
       "url": "https://huggingface.co/papers/2509.23610"
+    },
+    {
+      "arxiv_id": "2607.08112",
+      "title": "VSRo-200: A Romanian Visual Speech Recognition Dataset for Studying Supervision and Multimodal Robustness",
+      "track": "multilingual-visual-speech-recognition",
+      "priority": "P1",
+      "use": "Reproduce pseudo-label scaling, speaker/OOD evaluation, and isolated-word transfer methodology without treating Romanian artifacts as an English backend.",
+      "url": "https://arxiv.org/abs/2607.08112"
     }
   ]
 }

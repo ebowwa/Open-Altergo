@@ -10,7 +10,8 @@ These tasks are separate from the iOS execution queue.
   - Download through the checked-in script and capture SHA-256 values.
   - Acceptance: `source.json` contains an immutable revision and complete,
     verified metadata; no weights are committed.
-  - Evidence: `BLOCKED: Hugging Face repository was unreachable from the current environment`
+  - Evidence: `PARTIAL: model card supplied; Hub revision, complete inventory,
+    sizes, hashes, full architecture commit, and serialization review remain`
 
 - [ ] **PT-002 — Freeze the current Auto-AVSR evaluation baseline**
   - Dependencies: none.
@@ -27,6 +28,18 @@ These tasks are separate from the iOS execution queue.
   - Acceptance: identical held-out evaluation compares it to the frozen
     baseline; the current backend remains selectable and unchanged.
   - Evidence: `TBD`
+
+- [ ] **PT-004 — Close VSRo-200 provenance and dependency gaps**
+  - Resolve immutable Hub revisions and checksums for the sentence checkpoints,
+    LRRo MLP heads, and dataset metadata.
+  - Obtain or clarify the GitHub code license.
+  - Replace the upstream moving MultiVSR clone and unchecksummed VTP download
+    with exact source and artifact pins in any reproduction environment.
+  - Acceptance: every executable source and pickle artifact has a reviewed
+    license, revision, inventory, checksum, provenance chain, and isolation
+    decision; no upstream weights or datasets are committed.
+  - Evidence: `PARTIAL: GitHub code pinned at
+    267d44ee8fbd2de5b76a05441bb3bcbce838e457; model card pin recorded`
 
 - [ ] **PT-010 — Phoneme/viseme bottleneck experiment**
   - Dependencies: PT-002.
@@ -50,6 +63,16 @@ These tasks are separate from the iOS execution queue.
     multi-scale candidate.
   - Acceptance: WER, latency, real-time factor, peak memory, parameters, model
     size, and export feasibility are reported.
+  - Evidence: `TBD`
+
+- [ ] **PT-013 — Reproduce VSRo supervision and robustness methodology**
+  - Dependencies: PT-002, PT-004.
+  - Compare human labels with pseudo-labels across matched data scales and
+    preserve speaker-seen, speaker-unseen, and OOD evaluation.
+  - Record OOV token/type rates and multiple-run variance alongside WER/CER.
+  - Keep Romanian checkpoint results separate from English Open-Altergo results.
+  - Acceptance: one controlled report attributes gains to label quality, data
+    scale, and domain shift without changing normalization or decoder settings.
   - Evidence: `TBD`
 
 - [ ] **PT-020 — Decide whether to open a lip-to-speech track**
