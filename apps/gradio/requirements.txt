@@ -1,0 +1,2 @@
+-r ../../requirements-core.txt
+gradio==6.15.2

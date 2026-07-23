@@ -1,50 +1,53 @@
 # Personalized fine-tuning on Modal
 
 This workflow adapts the pretrained Auto-AVSR checkpoint to one person's mouth,
-articulation, camera, and vocabulary. It trains from exact prompted text and
-video; audio is not required.
-
-Modal is the cloud provisioning and execution layer here: it builds the image,
-allocates the A10 GPU, mounts persistent Volumes, retries interrupted work, and
-runs detached jobs. `train_personal.py` and the bundled Auto-AVSR/Lightning code
-contain the model, loss, optimizer, scheduler, and fine-tuning logic.
+articulation, camera, and vocabulary. Modal provisions compute; the provider-
+independent training implementation remains in `training/` and
+`open_altergo_engine`.
 
 The default strategy freezes the visual frontend and most of the 12-block
 Conformer. It updates the final two Conformer blocks, projection, Transformer
-decoder, and CTC head. This is safer than updating all 250 million parameters
-from a few hundred recordings.
+decoder, and CTC head.
 
-## 1. Install and authenticate Modal
+## 1. Install the Modal control-plane dependency
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements-modal.txt
-modal setup
+pip install -r cloud/modal/requirements.txt
 ```
 
-The Modal application lazily creates three persistent Volumes:
+Open-Altergo does not store Modal credentials. If Modal tokens are managed in
+Doppler, expose `MODAL_TOKEN_ID` and `MODAL_TOKEN_SECRET` only to each command:
 
-- `silent-lip-reader-data`: uploaded recordings and processed mouth crops
-- `silent-lip-reader-runs`: resumable Lightning checkpoints and exported models
-- `silent-lip-reader-hf-cache`: pretrained checkpoint and tokenizer cache
+```bash
+doppler run -- modal profile current
+```
+
+Interactive `modal setup` also works, but its generated credentials must remain
+outside the repository.
+
+The app creates three persistent Volumes:
+
+- `silent-lip-reader-data` for recordings and processed mouth crops
+- `silent-lip-reader-runs` for checkpoints and exported models
+- `silent-lip-reader-hf-cache` for checkpoint and tokenizer downloads
 
 ## 2. Record a prompted dataset
 
 Use at least three recording sessions and keep sentences disjoint across train,
-validation, and test splits. A practical first target is 300 unique prompts,
-recorded once while speaking normally and once while mouthing silently.
+validation, and test splits. A practical starting point is 300 unique prompts,
+recorded once normally and once while mouthing silently.
 
 ```text
 datasets/elijah/
 ├── manifest.csv
 └── clips/
     ├── session01-0001.mp4
-    ├── session01-0002.mp4
     └── ...
 ```
 
-`manifest.csv` must contain `id,video,text,split`:
+`manifest.csv` contains `id,video,text,split`:
 
 ```csv
 id,video,text,split
@@ -53,77 +56,53 @@ session02-0001,clips/session02-0001.mp4,can you tell me the latest with the task
 session03-0001,clips/session03-0001.mp4,please send the update when it is ready,test
 ```
 
-Use the displayed prompt as the transcript. Do not create train/test leakage by
-putting repetitions or near-duplicates of a test sentence into training.
-
 ## 3. Upload and preprocess
 
 ```bash
-modal volume create silent-lip-reader-data
-modal volume put silent-lip-reader-data ./datasets/elijah /elijah
-modal run modal_app.py::prepare --dataset-name elijah
+doppler run -- modal volume create silent-lip-reader-data
+doppler run -- modal volume put \
+  silent-lip-reader-data ./datasets/elijah /elijah
+doppler run -- modal run cloud/modal/app.py::prepare \
+  --dataset-name elijah
 ```
 
 Preprocessing strips audio, normalizes to 25 fps, aligns the face, writes 96x96
-mouth-only videos, normalizes prompt text to the checkpoint's uppercase
-SentencePiece vocabulary, and generates the token label files consumed by
-Auto-AVSR. Use `--flip` only if the recorded camera file is actually mirrored:
-
-```bash
-modal run modal_app.py::prepare --dataset-name elijah --flip
-```
+mouth-only videos, uppercases text for the released SentencePiece vocabulary,
+and emits Auto-AVSR label files. Add `--flip` only for mirrored source files.
 
 ## 4. Fine-tune
 
 ```bash
-modal run --detach modal_app.py::train \
+doppler run -- modal run --detach cloud/modal/app.py::train \
   --dataset-name elijah \
   --run-name elijah-v1 \
   --max-epochs 30
 ```
 
-The default A10 job saves `last.ckpt` after every epoch and automatically resumes
-it when the same run name is launched again. Modal's detached mode lets the job
-continue after the terminal closes.
-
-Available strategies:
+The A10 job writes `last.ckpt` and resumes it when the same run name is launched
+again. Available strategies are:
 
 - `decoder`: decoder and CTC head only
 - `encoder-decoder`: projection, last N Conformer blocks, decoder, and CTC
-- `full`: every parameter; not recommended for a small personal dataset
+- `full`: every parameter; risky for a small personal dataset
 
-Example conservative run:
-
-```bash
-modal run --detach modal_app.py::train \
-  --dataset-name elijah \
-  --run-name elijah-v1 \
-  --strategy encoder-decoder \
-  --unfreeze-encoder-layers 2 \
-  --learning-rate 0.00002
-```
-
-## 5. Download and use the personalized checkpoint
+## 5. Download and evaluate
 
 ```bash
 mkdir -p models
-modal volume get silent-lip-reader-runs \
+doppler run -- modal volume get silent-lip-reader-runs \
   /elijah-v1/personalized_model.pt \
   ./models/elijah-v1.pt
-```
 
-Run a clip directly:
-
-```bash
-python engine/local_infer.py sample.mp4 \
+python -m open_altergo_engine.local_infer sample.mp4 \
   --ckpt-path ./models/elijah-v1.pt
 ```
 
-Or launch the browser application with the personalized model:
+Or launch Gradio with the checkpoint:
 
 ```bash
 LIPREAD_CKPT=./models/elijah-v1.pt python app.py
 ```
 
-Always report raw visual-only WER on unseen test sentences before adding an LLM
-correction layer. The exported model remains speaker-specific.
+Always report raw visual-only WER on unseen sentences before adding an LLM
+correction layer. The exported checkpoint is speaker-specific.

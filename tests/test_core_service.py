@@ -1,6 +1,7 @@
 import unittest
 
 from silent_speech.core import RuntimeConfig, SilentSpeechService
+from silent_speech.core.service import _find_project_root
 
 
 class FakeReader:
@@ -32,6 +33,20 @@ class RuntimeConfigTests(unittest.TestCase):
 
     def test_empty_checkpoint_is_normalized_to_none(self):
         self.assertIsNone(RuntimeConfig.from_env({"LIPREAD_CKPT": ""}).checkpoint_path)
+
+    def test_checkout_engine_package_is_discoverable(self):
+        root = _find_project_root()
+
+        self.assertTrue(
+            (
+                root
+                / "cloud"
+                / "engine"
+                / "src"
+                / "open_altergo_engine"
+                / "pipeline.py"
+            ).is_file()
+        )
 
 
 class SilentSpeechServiceTests(unittest.TestCase):

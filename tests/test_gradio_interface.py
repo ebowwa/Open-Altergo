@@ -5,7 +5,7 @@ os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
 
 import gradio as gr
 
-from silent_speech.interfaces import gradio_app
+from apps.gradio import app as gradio_app
 
 
 def tearDownModule():
@@ -89,7 +89,7 @@ class GradioHandlerTests(unittest.TestCase):
 
 
 class CompatibilityLauncherTests(unittest.TestCase):
-    def test_root_app_exports_packaged_interface(self):
+    def test_root_app_exports_gradio_interface(self):
         import app
 
         self.assertIs(app.demo, gradio_app.demo)

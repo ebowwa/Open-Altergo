@@ -1,2 +1,1 @@
--r requirements-core.txt
-gradio==6.15.2
+-r apps/gradio/requirements.txt

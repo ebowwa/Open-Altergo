@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-altergo-engine"
+version = "0.1.0"
+description = "Auto-AVSR inference and training engine for Open-Altergo"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true
+
+[tool.setuptools.package-data]
+open_altergo_engine = ["**/*.npy"]
