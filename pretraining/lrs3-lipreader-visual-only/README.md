@@ -16,7 +16,7 @@ complete file inventory, sizes, and checksums remain unresolved.
 | Immutable revision | Unresolved |
 | Expected checkpoint | `model_avg_10.pth`; size and checksum unresolved |
 | Architecture/config | Visual-only Auto-AVSR, reported architecture commit `182b628` |
-| License | CC-BY-NC-4.0; noncommercial research only |
+| Distribution metadata | CC-BY-NC-4.0 |
 | Training data | `Ainncy/LRS3` trainval, with a deterministic 98/2 holdout |
 | Reported training | 20 epochs, A100-80GB, LR 0.001, approximately 4h40 |
 | Open-Altergo compatibility | Not tested |
@@ -79,5 +79,5 @@ Only then should a separate change add an adapter or training initialization
 path. The folder name `pretraining` is organizational and is not evidence that
 this particular artifact is a pretraining checkpoint.
 
-See the repository-wide [research roadmap](../RESEARCH_ROADMAP.md) for the
-evaluation and promotion gates around this candidate.
+See the repository-wide [capability plan](../CAPABILITY_PLAN.md) for the backend
+adapter, Adam-demo comparison, and Modal personalization sequence.

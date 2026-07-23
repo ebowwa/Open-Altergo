@@ -25,8 +25,8 @@ must not be counted as recognizer improvements.
    `simonlesaumon/lrs3-lipreader-visual-only` is reported as a 250M-parameter
    English visual-only Auto-AVSR checkpoint fine-tuned for 20 epochs on an
    `Ainncy/LRS3` trainval split. Its card declares CC-BY-NC-4.0. It stays
-   inactive until its full Hub revision, files, hashes, preprocessing contract,
-   full architecture commit, and safe-serialization review are complete.
+   Its first capability test starts once the full Hub revision, files, hashes,
+   preprocessing contract, and full architecture commit are resolved.
 
 2. **Phoneme-first decoding with an external language model.**
    [VALLR](https://huggingface.co/papers/2503.21408) proposes a Video
@@ -52,10 +52,10 @@ must not be counted as recognizer improvements.
 
 ### P1 — controlled ablations
 
-- [VSRo-200](https://arxiv.org/abs/2607.08112): reproduce its
+- [VSRo-200](https://arxiv.org/abs/2607.08112): extract and reproduce its
   human-label versus pseudo-label scaling protocol, speaker-seen/unseen and OOD
   splits, and transfer probe design. Its Romanian, CC-BY-NC-4.0 artifacts are
-  research references, not an English production backend.
+  techniques without treating the Romanian decoder as an English backend.
 - [External viseme decoding](https://huggingface.co/papers/2104.04784):
   compare explicit video-to-viseme and viseme-to-text stages. The abstract
   reports a four-point WER improvement on LRS2 over its stated baseline.
@@ -139,7 +139,7 @@ must never contaminate the held-out real-video test set.
 ### R1 — admit or reject the requested checkpoint
 
 1. Resolve the full Hugging Face commit.
-2. Review the exact model card and declared license.
+2. Inventory the exact model card, architecture, and preprocessing contract.
 3. Inventory file names, sizes, Xet/LFS pointers, and SHA-256 values.
 4. Determine architecture, tokenizer, crop size, frame rate, normalization, and
    expected detector/alignment.
@@ -196,12 +196,11 @@ must never contaminate the held-out real-video test set.
   per-language metrics.
 - Prevent translated or speaker-overlapping examples from leaking across splits.
 
-## Promotion gate
+## Capability promotion gate
 
 A candidate becomes an Open-Altergo backend only when all of these are checked:
 
 - immutable source revision and file checksums;
-- compatible redistribution and use rights;
 - documented original authors, datasets, and training stage;
 - safe serialization review;
 - deterministic preprocessing contract;
@@ -212,4 +211,5 @@ A candidate becomes an Open-Altergo backend only when all of these are checked:
 - model card updated with actual limitations.
 
 Until then it remains research metadata under `pretraining/`, not a supported
-engine dependency.
+engine dependency. Redistribution review is separate and occurs when a backend
+is packaged, hosted commercially, or its weights are published.

@@ -18,9 +18,9 @@ VSRo-200 is useful as a research reference for:
 - shallow audio/visual fusion under acoustic noise.
 
 It is not a drop-in replacement for the English silent-speech demo. The released
-sentence model and tokenizer are Romanian, the LRRo artifacts are word
-classifiers rather than sentence transcribers, and the model/dataset license is
-noncommercial.
+sentence model and tokenizer are Romanian, while the LRRo artifacts are word
+classifiers rather than sentence transcribers. Its immediate value is encoder
+transfer, pseudo-label scaling, OOD evaluation, and probe design.
 
 ## Source status
 
@@ -28,10 +28,10 @@ The full machine-readable record is in [`sources.json`](sources.json).
 
 | Source | Pin | License | Status |
 | --- | --- | --- | --- |
-| `vsro200/vsro200` GitHub code | `267d44ee8fbd2de5b76a05441bb3bcbce838e457` | No license file found | Inspect only |
-| `vsro200/models-vsro200` | `4195b93fb621b2911fd2d854ca46eea054c735dd` | CC-BY-NC-4.0 | Research only; checksums incomplete |
-| `vsro200/mlp-lrro-vsro200` | Unresolved | Unverified | Quarantined |
-| `vsro200/vsro200` dataset | Unresolved | CC-BY-NC-4.0 | Research metadata only |
+| `vsro200/vsro200` GitHub code | `267d44ee8fbd2de5b76a05441bb3bcbce838e457` | Inspect architecture and training |
+| `vsro200/models-vsro200` | `4195b93fb621b2911fd2d854ca46eea054c735dd` | Inventory, download, and test encoder transfer |
+| `vsro200/mlp-lrro-vsro200` | Unresolved | Resolve revision, then reproduce probe pattern |
+| `vsro200/vsro200` dataset | Unresolved | Reproduce supervision/OOD methodology |
 
 The known model pin is an immutable, indexed Hugging Face revision that follows
 the commit which added CC-BY-NC-4.0 metadata. It is not asserted to be the
@@ -51,7 +51,7 @@ root contains no `LICENSE` file. Its setup script also:
 Its inference code downloads `.pt` files without a `revision=` argument and
 loads them with `torch.load`. Treat every checkpoint as executable input.
 Reproduction in Open-Altergo must replace those moving downloads with explicit
-pins, hashes, isolated loading, and a license decision.
+pins, hashes, and isolated loading.
 
 ## Download for inspection
 
@@ -74,3 +74,6 @@ keep language, tokenizer, data rights, text normalization, speaker split,
 checkpoint revision, and post-decoder correction explicit. The Adam launch
 video remains qualitative regression material, never training data or a test
 set.
+
+The concrete implementation order is in
+[`../CAPABILITY_PLAN.md`](../CAPABILITY_PLAN.md).

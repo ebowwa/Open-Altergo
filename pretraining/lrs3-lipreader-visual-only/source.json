@@ -6,7 +6,7 @@
   "license": "CC-BY-NC-4.0",
   "license_source": "upstream model card supplied for review",
   "commercial_use": false,
-  "status": "research-only-awaiting-immutable-revision-and-checksums",
+  "status": "capability-integration-awaiting-immutable-revision-and-checksums",
   "active": false,
   "expected_files": {
     "model_avg_10.pth": {

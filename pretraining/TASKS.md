@@ -5,8 +5,8 @@ These tasks are separate from the iOS execution queue.
 - [ ] **PT-001 — Pin and inspect the requested Hugging Face repository**
   - Resolve the full `main` commit for
     `simonlesaumon/lrs3-lipreader-visual-only`.
-  - Review the model card, declared license, file history, sizes, serialization,
-    architecture, tokenizer, preprocessing, authors, and training provenance.
+  - Review file history, sizes, serialization, architecture, tokenizer,
+    preprocessing, checkpoint keys, and training provenance.
   - Download through the checked-in script and capture SHA-256 values.
   - Acceptance: `source.json` contains an immutable revision and complete,
     verified metadata; no weights are committed.
@@ -29,17 +29,33 @@ These tasks are separate from the iOS execution queue.
     baseline; the current backend remains selectable and unchanged.
   - Evidence: `TBD`
 
-- [ ] **PT-004 — Close VSRo-200 provenance and dependency gaps**
+- [ ] **PT-004 — Make VSRo-200 reproducible enough to test**
   - Resolve immutable Hub revisions and checksums for the sentence checkpoints,
     LRRo MLP heads, and dataset metadata.
-  - Obtain or clarify the GitHub code license.
   - Replace the upstream moving MultiVSR clone and unchecksummed VTP download
     with exact source and artifact pins in any reproduction environment.
-  - Acceptance: every executable source and pickle artifact has a reviewed
-    license, revision, inventory, checksum, provenance chain, and isolation
-    decision; no upstream weights or datasets are committed.
+  - Acceptance: every executable source and pickle artifact has a revision,
+    inventory, checksum, provenance chain, and isolation decision; no upstream
+    weights or datasets are committed.
   - Evidence: `PARTIAL: GitHub code pinned at
     267d44ee8fbd2de5b76a05441bb3bcbce838e457; model card pin recorded`
+
+- [ ] **PT-005 — Add the English LRS3 backend adapter**
+  - Dependencies: PT-001, PT-002.
+  - Map checkpoint keys and tensor shapes to the current engine.
+  - Implement backend selection through the shared service boundary.
+  - Run the Adam demo through current and candidate backends.
+  - Acceptance: Python API, HTTP API, and Gradio can select the candidate while
+    the current backend remains the default; comparison artifacts include
+    transcript, timings, failures, WER/CER where references exist, and latency.
+  - Evidence: `TBD`
+
+- [ ] **PT-006 — Warm-start Modal personalization from the LRS3 backend**
+  - Dependencies: PT-005.
+  - Compare frozen encoder, partial unfreeze, and full fine-tuning.
+  - Acceptance: a real Modal run emits reloadable exported weights, run
+    metadata, raw predictions, held-out WER/CER, and baseline comparison.
+  - Evidence: `TBD`
 
 - [ ] **PT-010 — Phoneme/viseme bottleneck experiment**
   - Dependencies: PT-002.
