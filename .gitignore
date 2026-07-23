@@ -33,3 +33,9 @@ unigram5000_units.txt
 *.key
 credentials.json
 secrets.json
+
+# Native Apple build, test, and local agent-loop artifacts
+apps/apple/.build/
+
+# Externally downloaded pretraining/model assets
+pretraining/.cache/

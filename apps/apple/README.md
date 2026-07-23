@@ -33,6 +33,15 @@ documents are the executable specification:
 8. [PATTERNS.md](PATTERNS.md) — which existing repository conventions this plan
    adopts and which hazards it deliberately avoids.
 
+On the Mac, the automated entry point is:
+
+```bash
+apps/apple/scripts/claude-loop.sh
+```
+
+It runs Claude Code through the `seed` / `prd` Doppler scope, matching the
+repository owner's normal local invocation.
+
 No Xcode project has been generated yet. Generate it on macOS with the Xcode
 version that will actually compile and test it; do not commit a guessed project
 created or edited on another platform.
