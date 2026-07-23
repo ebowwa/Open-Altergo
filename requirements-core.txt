@@ -1,0 +1,13 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+pytorch-lightning>=2.0.0
+mediapipe==0.10.21
+opencv-python-headless
+numpy<2
+Pillow
+sentencepiece
+scikit-image
+av==12.3.0
+huggingface-hub>=0.33.5,<2

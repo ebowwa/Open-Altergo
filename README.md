@@ -60,6 +60,17 @@ and exports a state dict that works with both the CLI and this Gradio applicatio
 See **[docs/modal-finetuning.md](docs/modal-finetuning.md)** for dataset format,
 upload, preprocessing, training, checkpoint download, and evaluation commands.
 
+## Interface architecture
+
+The inference service is now independent of Gradio. `silent_speech/core` owns
+configuration, lazy model loading, and transcription; `silent_speech/interfaces`
+contains optional UI adapters. The existing `python app.py` command remains
+compatible, while future HTTP, Swift, or other clients can reuse the same core
+service without importing Gradio.
+
+See **[docs/interface-architecture.md](docs/interface-architecture.md)** for the
+package layout, core API, dependency split, and Swift integration path.
+
 ## How it's different from existing solutions
 
 | Existing demos | This project |
