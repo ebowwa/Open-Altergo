@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "repository_id": "simonlesaumon/lrs3-lipreader-visual-only",
+  "repository_type": "model",
+  "revision": null,
+  "license": "unverified",
+  "status": "quarantined-until-pinned-and-reviewed",
+  "active": false,
+  "expected_files": [],
+  "provenance": {
+    "dataset_claim_from_repository_name": "LRS3",
+    "architecture": "unverified",
+    "authors": "unverified",
+    "training_stage": "unverified"
+  }
+}

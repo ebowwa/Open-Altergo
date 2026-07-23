@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "review_depth": "title-and-abstract-triage",
+  "papers": [
+    {
+      "arxiv_id": "2503.21408",
+      "title": "VALLR: Visual ASR Language Model for Lip Reading",
+      "track": "visual-speech-recognition",
+      "priority": "P0",
+      "use": "Evaluate a phoneme-CTC visual front end followed by a language model.",
+      "url": "https://huggingface.co/papers/2503.21408"
+    },
+    {
+      "arxiv_id": "2306.03258",
+      "title": "LipVoicer: Generating Speech from Silent Videos Guided by Lip Reading",
+      "track": "lip-to-speech",
+      "priority": "separate-future-track",
+      "use": "Possible speech reconstruction after recognition; not a recognizer baseline.",
+      "url": "https://huggingface.co/papers/2306.03258"
+    },
+    {
+      "arxiv_id": "2308.09311",
+      "title": "Lip Reading for Low-resource Languages by Learning and Combining General Speech Knowledge and Language-specific Knowledge",
+      "track": "multilingual-visual-speech-recognition",
+      "priority": "P1",
+      "use": "Separate transferable visual speech units from language-specific decoding.",
+      "url": "https://huggingface.co/papers/2308.09311"
+    },
+    {
+      "arxiv_id": "2104.04784",
+      "title": "Lip reading using external viseme decoding",
+      "track": "visual-speech-recognition",
+      "priority": "P1",
+      "use": "Compare a video-to-viseme front end plus external viseme-to-text decoder.",
+      "url": "https://huggingface.co/papers/2104.04784"
+    },
+    {
+      "arxiv_id": "2005.03846",
+      "title": "Synchronous Bidirectional Learning for Multilingual Lip Reading",
+      "track": "multilingual-visual-speech-recognition",
+      "priority": "P1",
+      "use": "Evaluate phoneme units and cross-language visual sharing.",
+      "url": "https://huggingface.co/papers/2005.03846"
+    },
+    {
+      "arxiv_id": "2003.03983",
+      "title": "Pseudo-Convolutional Policy Gradient for Sequence-to-Sequence Lip-Reading",
+      "track": "visual-speech-recognition",
+      "priority": "P2",
+      "use": "Reference for sequence-level objectives closer to WER than token cross-entropy.",
+      "url": "https://huggingface.co/papers/2003.03983"
+    },
+    {
+      "arxiv_id": "2401.15668",
+      "title": "Lips Are Lying: Spotting the Temporal Inconsistency between Audio and Visual in Lip-Syncing DeepFakes",
+      "track": "audio-visual-integrity",
+      "priority": "adjacent",
+      "use": "Potential synchronization/integrity diagnostics; not visual-only transcription.",
+      "url": "https://huggingface.co/papers/2401.15668"
+    },
+    {
+      "arxiv_id": "1911.11502",
+      "title": "Hearing Lips: Improving Lip Reading by Distilling Speech Recognizers",
+      "track": "visual-speech-recognition",
+      "priority": "P0",
+      "use": "Evaluate cross-modal distillation from an audio speech-recognition teacher.",
+      "url": "https://huggingface.co/papers/1911.11502"
+    },
+    {
+      "arxiv_id": "2008.10010",
+      "title": "A Lip Sync Expert Is All You Need for Speech to Lip Generation In The Wild",
+      "track": "speech-to-lip-generation",
+      "priority": "out-of-scope",
+      "use": "Possible synchronization metric or augmentation research; task direction is opposite.",
+      "url": "https://huggingface.co/papers/2008.10010"
+    },
+    {
+      "arxiv_id": "1611.01599",
+      "title": "LipNet: End-to-End Sentence-level Lipreading",
+      "track": "visual-speech-recognition",
+      "priority": "historical-baseline",
+      "use": "Historical sentence-level CTC baseline and terminology.",
+      "url": "https://huggingface.co/papers/1611.01599"
+    },
+    {
+      "arxiv_id": "2502.12002",
+      "title": "NaturalL2S: End-to-End High-quality Multispeaker Lip-to-Speech Synthesis with Differential Digital Signal Processing",
+      "track": "lip-to-speech",
+      "priority": "separate-future-track",
+      "use": "Future natural speech synthesis from lips; not text recognition.",
+      "url": "https://huggingface.co/papers/2502.12002"
+    },
+    {
+      "arxiv_id": "2504.15066",
+      "title": "Chinese-LiPS: A Chinese audio-visual speech recognition dataset with Lip-reading and Presentation Slides",
+      "track": "dataset-and-context",
+      "priority": "adjacent",
+      "use": "Reference for Chinese AVSR and contextual slide information.",
+      "url": "https://huggingface.co/papers/2504.15066"
+    },
+    {
+      "arxiv_id": "2501.11899",
+      "title": "LASER: Lip Landmark Assisted Speaker Detection for Robustness",
+      "track": "active-speaker-detection",
+      "priority": "adjacent",
+      "use": "Potential multi-face speaker selection and landmark robustness.",
+      "url": "https://huggingface.co/papers/2501.11899"
+    },
+    {
+      "arxiv_id": "2404.05466",
+      "title": "Enhancing Lip Reading with Multi-Scale Video and Multi-Encoder",
+      "track": "visual-speech-recognition",
+      "priority": "P1",
+      "use": "Evaluate multi-scale video and Branchformer-family encoder ensembles.",
+      "url": "https://huggingface.co/papers/2404.05466"
+    },
+    {
+      "arxiv_id": "2303.00502",
+      "title": "On the Audio-visual Synchronization for Lip-to-Speech Synthesis",
+      "track": "lip-to-speech",
+      "priority": "separate-future-track",
+      "use": "Synchronization QA if Open-Altergo later reconstructs speech.",
+      "url": "https://huggingface.co/papers/2303.00502"
+    },
+    {
+      "arxiv_id": "2505.04394",
+      "title": "SwinLip: An Efficient Visual Speech Encoder for Lip Reading Using Swin Transformer",
+      "track": "visual-speech-recognition",
+      "priority": "P0",
+      "use": "Evaluate a more efficient visual encoder and possible on-device path.",
+      "url": "https://huggingface.co/papers/2505.04394"
+    },
+    {
+      "arxiv_id": "2509.23610",
+      "title": "Efficient Audio-Visual Speech Separation with Discrete Lip Semantics and Multi-Scale Global-Local Attention",
+      "track": "audio-visual-speech-separation",
+      "priority": "adjacent",
+      "use": "Reference for discrete visual speech semantics; primary task requires audio.",
+      "url": "https://huggingface.co/papers/2509.23610"
+    }
+  ]
+}

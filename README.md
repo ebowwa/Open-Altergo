@@ -38,6 +38,7 @@ apis/
 ├── python_api/                Direct, in-process Python interface
 └── http_api/                  Network interface for Swift and other clients
 training/                      Dataset preparation and fine-tuning commands
+pretraining/                   Pinned external pretraining/model sources
 cloud/
 ├── engine/                    Installable Auto-AVSR engine package
 └── modal/                     Modal provisioning and job definitions
@@ -135,6 +136,13 @@ python training/train_personal.py \
 
 See [Modal fine-tuning](docs/modal-finetuning.md) for provisioned A10 training,
 persistent checkpoints, and Doppler-based secret injection.
+
+## External pretraining sources
+
+Candidate upstream model repositories live under `pretraining/` as metadata and
+download tooling. Large weights remain on their original host and are fetched
+at an immutable revision into an ignored local cache. See
+[pretraining](pretraining/README.md).
 
 ## Status and provenance
 
