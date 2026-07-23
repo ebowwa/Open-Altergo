@@ -58,6 +58,9 @@ training workflows ────────────────────�
 Modal ───────────────────────► training workflows
 ```
 
+The native iOS architecture, test matrix, Claude Code execution loop, and
+TestFlight plan live in [apps/apple](apps/apple/README.md).
+
 ## Run the Gradio application
 
 Python 3.11 and `ffmpeg` are recommended.
