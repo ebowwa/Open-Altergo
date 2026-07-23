@@ -48,7 +48,6 @@ def _find_project_root() -> Path:
             / "cloud"
             / "engine"
             / "src"
-            / "open_altergo_engine"
             / "pipeline.py"
         )
         if pipeline.is_file():
@@ -67,10 +66,6 @@ def _engine_reader_factory(config: RuntimeConfig) -> ReaderBackend:
         vendor_path = project_root / "vendor" / vendor_name
         if vendor_path.is_dir() and str(vendor_path) not in sys.path:
             sys.path.insert(0, str(vendor_path))
-
-    engine_src = project_root / "cloud" / "engine" / "src"
-    if str(engine_src) not in sys.path:
-        sys.path.insert(0, str(engine_src))
 
     from open_altergo_engine.pipeline import LipReader
 

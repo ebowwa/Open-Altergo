@@ -5,6 +5,8 @@ Open-Altergo separates direct Python calls from network access:
 ```text
 apps/gradio/
     app.py
+apps/apple/
+    README.md
 apis/python_api/
     pyproject.toml
     src/
@@ -14,7 +16,11 @@ apis/http_api/
     app.py
 cloud/engine/
     pyproject.toml
-    src/open_altergo_engine/
+    src/
+        __init__.py
+        datamodule/
+        espnet/
+        preparation/
 training/
 cloud/modal/
 ```
@@ -86,6 +92,15 @@ Swift calls the HTTP API; it does not embed the Python API:
 ```text
 Swift ──HTTP──► http_api ──direct call──► python_api ──► engine
 ```
+
+The first macOS and iOS distributions are consumption clients: capture or
+select video, request transcription, and present results. Ordinary
+transcription uploads are temporary request data, not training examples.
+
+Personalization collection should use a separate authenticated contract for
+prompted recordings, exact labels, session metadata, corrections, retention,
+deletion, training status, and personalized-model selection. Collection must be
+opt-in and must never be inferred from use of the transcription endpoint.
 
 On-device Swift inference remains a separate track requiring model export and a
 native port of mouth-alignment preprocessing.

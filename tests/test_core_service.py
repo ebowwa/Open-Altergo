@@ -43,7 +43,6 @@ class RuntimeConfigTests(unittest.TestCase):
                 / "cloud"
                 / "engine"
                 / "src"
-                / "open_altergo_engine"
                 / "pipeline.py"
             ).is_file()
         )

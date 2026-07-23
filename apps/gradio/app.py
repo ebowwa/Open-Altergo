@@ -1,15 +1,7 @@
 """Gradio adapter for the interface-neutral silent-speech service."""
 
-import sys
 import traceback
 from collections.abc import Callable
-from pathlib import Path
-
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-ENGINE_SRC = PROJECT_ROOT / "cloud" / "engine" / "src"
-if str(ENGINE_SRC) not in sys.path:
-    sys.path.insert(0, str(ENGINE_SRC))
 
 import gradio as gr
 

@@ -32,7 +32,8 @@ current browser interface is Gradio.
 
 ```text
 apps/
-└── gradio/                    Gradio UI and its dependencies
+├── gradio/                    Gradio UI and its dependencies
+└── apple/                     Planned macOS and iOS consumption clients
 apis/
 ├── python_api/                Direct, in-process Python interface
 └── http_api/                  Network interface for Swift and other clients

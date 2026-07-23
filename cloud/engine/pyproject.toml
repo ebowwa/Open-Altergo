@@ -8,9 +8,25 @@ version = "0.1.0"
 description = "Auto-AVSR inference and training engine for Open-Altergo"
 requires-python = ">=3.11"
 
-[tool.setuptools.packages.find]
-where = ["src"]
-namespaces = true
+[tool.setuptools]
+packages = [
+  "open_altergo_engine",
+  "open_altergo_engine.datamodule",
+  "open_altergo_engine.espnet",
+  "open_altergo_engine.espnet.nets",
+  "open_altergo_engine.espnet.nets.pytorch_backend",
+  "open_altergo_engine.espnet.nets.pytorch_backend.decoder",
+  "open_altergo_engine.espnet.nets.pytorch_backend.encoder",
+  "open_altergo_engine.espnet.nets.pytorch_backend.frontend",
+  "open_altergo_engine.espnet.nets.pytorch_backend.transformer",
+  "open_altergo_engine.espnet.nets.scorers",
+  "open_altergo_engine.preparation",
+  "open_altergo_engine.preparation.data",
+  "open_altergo_engine.preparation.detectors",
+  "open_altergo_engine.preparation.detectors.mediapipe",
+  "open_altergo_engine.preparation.detectors.retinaface",
+]
+package-dir = {open_altergo_engine = "src"}
 
 [tool.setuptools.package-data]
 open_altergo_engine = ["*.json", "**/*.npy"]

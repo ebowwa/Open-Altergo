@@ -8,12 +8,7 @@ The produced ``personalized_model.pt`` is a raw E2E state dict compatible with
 import argparse
 import json
 import os
-import sys
 from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-ENGINE_SRC = PROJECT_ROOT / "cloud" / "engine" / "src"
-sys.path.insert(0, str(ENGINE_SRC))
 
 VALID_STRATEGIES = {"decoder", "encoder-decoder", "full"}
 

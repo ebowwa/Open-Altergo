@@ -10,15 +10,9 @@ import csv
 import json
 import re
 import subprocess
-import sys
 import tempfile
 from collections import defaultdict
 from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-ENGINE_SRC = PROJECT_ROOT / "cloud" / "engine" / "src"
-sys.path.insert(0, str(PROJECT_ROOT))
-sys.path.insert(0, str(ENGINE_SRC))
 
 
 VALID_SPLITS = {"train", "val", "test"}
