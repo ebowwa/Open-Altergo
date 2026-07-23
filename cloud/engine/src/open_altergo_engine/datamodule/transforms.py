@@ -6,7 +6,8 @@ import sentencepiece
 import torch
 import torchaudio
 import torchvision
-from huggingface_hub import hf_hub_download
+
+from open_altergo_engine.model_assets import download_model_file
 
 
 NOISE_FILENAME = os.path.join(
@@ -14,18 +15,8 @@ NOISE_FILENAME = os.path.join(
 )
 
 
-def _dl(filename):
-    # prefer our self-contained public mirror; fall back to upstream
-    for repo in ("aaahmet/silent-lip-reader-model", "AD1TEYA/lip-reading-model"):
-        try:
-            return hf_hub_download(repo_id=repo, filename=filename)
-        except Exception:
-            continue
-    raise RuntimeError(f"could not download {filename}")
-
-
-SP_MODEL_PATH = _dl("unigram5000.model")
-DICT_PATH = _dl("unigram5000_units.txt")
+SP_MODEL_PATH = download_model_file("unigram5000.model")
+DICT_PATH = download_model_file("unigram5000_units.txt")
 class FunctionalModule(torch.nn.Module):
     def __init__(self, functional):
         super().__init__()

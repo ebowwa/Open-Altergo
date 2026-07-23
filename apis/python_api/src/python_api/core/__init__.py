@@ -1,4 +1,4 @@
-"""Gradio-independent silent-speech application services."""
+"""Interface-independent silent-speech application services."""
 
 from .config import RuntimeConfig
 from .service import SilentSpeechService

@@ -55,17 +55,9 @@ def _resolve_pretrained_checkpoint(path):
             raise FileNotFoundError(f"Pretrained checkpoint not found: {resolved}")
         return str(resolved)
 
-    from huggingface_hub import hf_hub_download
+    from open_altergo_engine.model_assets import download_model_file
 
-    for repository in (
-        "aaahmet/silent-lip-reader-model",
-        "AD1TEYA/lip-reading-model",
-    ):
-        try:
-            return hf_hub_download(repository, filename="pytorch_model.pt")
-        except Exception:
-            continue
-    raise RuntimeError("Could not download the pretrained Auto-AVSR checkpoint")
+    return download_model_file("pytorch_model.pt")
 
 
 def _validate_labels(root_dir, filenames):

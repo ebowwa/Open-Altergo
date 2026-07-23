@@ -33,8 +33,9 @@ current browser interface is Gradio.
 ```text
 apps/
 └── gradio/                    Gradio UI and its dependencies
-packages/
-└── silent_speech/             Interface-neutral service package
+apis/
+├── python_api/                Direct, in-process Python interface
+└── http_api/                  Network interface for Swift and other clients
 training/                      Dataset preparation and fine-tuning commands
 cloud/
 ├── engine/                    Installable Auto-AVSR engine package
@@ -50,9 +51,10 @@ app.py                         Hugging Face compatibility launcher
 The dependency direction is deliberate:
 
 ```text
-Gradio / future Swift bridge ──► silent_speech ──► engine
-training workflows ─────────────────────────────► engine
-Modal ────────────────────────► training workflows
+Gradio ───────────────────────► Python API ──► engine
+Swift / remote clients ─HTTP─► HTTP API ─────► Python API
+training workflows ──────────────────────────► engine
+Modal ───────────────────────► training workflows
 ```
 
 ## Run the Gradio application
@@ -76,7 +78,7 @@ pip install -r requirements-core.txt
 ```
 
 ```python
-from silent_speech import RuntimeConfig, SilentSpeechService
+from python_api import RuntimeConfig, SilentSpeechService
 
 service = SilentSpeechService(RuntimeConfig(device="cpu"))
 result = service.transcribe("sample.mp4")
@@ -84,6 +86,31 @@ print(result["transcript"])
 ```
 
 Set `LIPREAD_CKPT` to use a personalized checkpoint.
+
+## Run the HTTP API
+
+```bash
+pip install -r apis/http_api/requirements.txt
+uvicorn apis.http_api.app:app --host 0.0.0.0 --port 8000
+```
+
+The HTTP API lets Swift and other non-Python clients upload a video to
+`POST /v1/transcriptions`. It wraps the same Python API used by Gradio.
+
+## Model assets
+
+The Auto-AVSR checkpoint and tokenizer remain on Hugging Face rather than Git
+LFS. The engine packages a central manifest with the repository, immutable
+revision, expected sizes, SHA-256 checksums, provenance, and license.
+
+Download and verify the complete bundle:
+
+```bash
+python -m open_altergo_engine.model_assets download \
+  --local-dir ./models/silent-lip-reader
+```
+
+See [model assets](docs/model-assets.md) for exact hashes and provenance.
 
 ## Train on generic compute
 

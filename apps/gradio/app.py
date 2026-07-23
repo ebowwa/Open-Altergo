@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PACKAGE_SRC = PROJECT_ROOT / "packages" / "silent_speech" / "src"
+PACKAGE_SRC = PROJECT_ROOT / "apis" / "python_api" / "src"
 ENGINE_SRC = PROJECT_ROOT / "cloud" / "engine" / "src"
 for source_root in (PACKAGE_SRC, ENGINE_SRC):
     if str(source_root) not in sys.path:
@@ -15,7 +15,7 @@ for source_root in (PACKAGE_SRC, ENGINE_SRC):
 
 import gradio as gr
 
-from silent_speech.core import RuntimeConfig, SilentSpeechService
+from python_api.core import RuntimeConfig, SilentSpeechService
 
 
 TIPS = """

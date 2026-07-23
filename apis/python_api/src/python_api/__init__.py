@@ -1,4 +1,4 @@
-"""Reusable application package for Silent Lip Reader."""
+"""In-process Python API for Open-Altergo."""
 
 from .core import RuntimeConfig, SilentSpeechService
 

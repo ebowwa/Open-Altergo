@@ -22,7 +22,13 @@ outputs/
 # Local caches
 .cache/
 .hf-cache/
+.huggingface/
+huggingface-cache/
 .modal/
+*.safetensors
+*.bin
+unigram5000.model
+unigram5000_units.txt
 *.pem
 *.key
 credentials.json

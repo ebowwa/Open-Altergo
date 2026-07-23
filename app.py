@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-PACKAGE_SRC = Path(__file__).resolve().parent / "packages" / "silent_speech" / "src"
+PACKAGE_SRC = Path(__file__).resolve().parent / "apis" / "python_api" / "src"
 if str(PACKAGE_SRC) not in sys.path:
     sys.path.insert(0, str(PACKAGE_SRC))
 

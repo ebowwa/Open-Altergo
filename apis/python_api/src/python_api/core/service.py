@@ -59,7 +59,7 @@ def _find_project_root() -> Path:
     )
 
 
-def _legacy_reader_factory(config: RuntimeConfig) -> ReaderBackend:
+def _engine_reader_factory(config: RuntimeConfig) -> ReaderBackend:
     """Load Auto-AVSR without exposing its path setup to interfaces."""
 
     project_root = _find_project_root()
@@ -96,7 +96,7 @@ class SilentSpeechService:
         reader_factory: ReaderFactory | None = None,
     ):
         self.config = config or RuntimeConfig.from_env()
-        self._reader_factory = reader_factory or _legacy_reader_factory
+        self._reader_factory = reader_factory or _engine_reader_factory
         self._reader: ReaderBackend | None = None
         self._load_lock = threading.Lock()
         self._inference_lock = threading.Lock()

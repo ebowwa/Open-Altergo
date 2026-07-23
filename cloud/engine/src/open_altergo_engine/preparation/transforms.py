@@ -7,24 +7,15 @@ import torch
 import torchaudio
 import torchvision
 
+from open_altergo_engine.model_assets import download_model_file
+
 
 NOISE_FILENAME = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "babble_noise.wav"
 )
 
-SP_MODEL_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "spm",
-    "unigram",
-    "unigram5000.model",
-)
-
-DICT_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "spm",
-    "unigram",
-    "unigram5000_units.txt",
-)
+SP_MODEL_PATH = download_model_file("unigram5000.model")
+DICT_PATH = download_model_file("unigram5000_units.txt")
 
 
 class FunctionalModule(torch.nn.Module):

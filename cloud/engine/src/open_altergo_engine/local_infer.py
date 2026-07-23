@@ -12,25 +12,18 @@ crop (96x96) -> CenterCrop(88)+grayscale+normalize -> conformer + beam search.
 import os
 import argparse
 import time
-from pathlib import Path
 
 import torch
 import torchvision
 
 from .datamodule.transforms import VideoTransform, TextTransform
 from .lightning import get_beam_search_decoder
+from .model_assets import download_model_file
 from .espnet.nets.pytorch_backend.e2e_asr_conformer import E2E
-
-CKPT = str(
-    Path(__file__).resolve().parents[4]
-    / "models"
-    / "aditeya-vsr"
-    / "pytorch_model.pt"
-)
 
 
 class LocalVSR:
-    def __init__(self, ckpt_path=CKPT, device="cpu", enhance=False,
+    def __init__(self, ckpt_path=None, device="cpu", enhance=False,
                  detector="mediapipe", det_device="cpu"):
         self.device = torch.device(device)
         self.enhance = enhance  # CLAHE contrast enhancement on luminance
@@ -57,16 +50,11 @@ class LocalVSR:
         self.token_list = self.text_transform.token_list
 
         self.model = E2E(len(self.token_list), "video", ctc_weight=0.1)
-        if not os.path.isfile(ckpt_path):
-            from huggingface_hub import hf_hub_download
-            # prefer our self-contained public mirror; fall back to upstream
-            for repo in ("aaahmet/silent-lip-reader-model", "AD1TEYA/lip-reading-model"):
-                try:
-                    ckpt_path = hf_hub_download(repo_id=repo, filename="pytorch_model.pt")
-                    break
-                except Exception:
-                    continue
-        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+        if ckpt_path is None:
+            ckpt_path = download_model_file("pytorch_model.pt")
+        elif not os.path.isfile(ckpt_path):
+            raise FileNotFoundError(f"Checkpoint not found: {ckpt_path}")
+        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=True)
         self.model.load_state_dict(ckpt)
         self.model = self.model.to(self.device).eval()
 
@@ -147,7 +135,7 @@ class LocalVSR:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("video")
-    ap.add_argument("--ckpt-path", default=CKPT)
+    ap.add_argument("--ckpt-path")
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--nbest", type=int, default=5)
     a = ap.parse_args()

@@ -1,34 +1,29 @@
-# Interface and package architecture
+# Interface and API architecture
 
-Open-Altergo has two installable Python packages and one application today.
+Open-Altergo separates direct Python calls from network access:
 
 ```text
 apps/gradio/
     app.py
-packages/silent_speech/
+apis/python_api/
     pyproject.toml
-    src/silent_speech/
+    src/python_api/
+apis/http_api/
+    app.py
 cloud/engine/
     pyproject.toml
     src/open_altergo_engine/
 training/
-    prepare_dataset.py
-    train_personal.py
-    personalization.py
 cloud/modal/
-    app.py
 ```
 
-`open_altergo_engine` owns Auto-AVSR preprocessing, model construction,
-decoding, and training primitives. `silent_speech` owns the stable,
-interface-neutral service contract. `apps/gradio` is only a presentation
-adapter. `training` contains runnable workflows, while `cloud/modal` provisions
-and invokes those workflows.
+## Python API
 
-## Core API
+`python_api` is the in-process interface. Gradio and the HTTP server import it
+directly:
 
 ```python
-from silent_speech import RuntimeConfig, SilentSpeechService
+from python_api import RuntimeConfig, SilentSpeechService
 
 service = SilentSpeechService(
     RuntimeConfig(
@@ -45,13 +40,32 @@ Creating the service does not load a checkpoint. The first transcription loads
 it once. Separate initialization and inference locks prevent duplicate model
 loads and concurrent mutation of decoder state.
 
-When installed outside the checkout, set `OPEN_ALTERGO_ROOT` to a checkout that
-contains `cloud/engine`, or install and run both editable packages from the
-repository:
+Install the direct API and engine:
 
 ```bash
-pip install -e cloud/engine -e packages/silent_speech
+pip install -e cloud/engine -e apis/python_api
 ```
+
+## HTTP API
+
+The HTTP API is a real network boundary for Swift, remote programs, and other
+languages:
+
+```bash
+pip install -r apis/http_api/requirements.txt
+uvicorn apis.http_api.app:app --host 0.0.0.0 --port 8000
+```
+
+Endpoints:
+
+- `GET /health` reports process and lazy-model state.
+- `POST /v1/transcriptions` accepts a multipart video plus `hflip`, `nbest`,
+  and `max_seconds`.
+
+Uploaded files are capped at 250 MB and removed after each request. The
+development server intentionally has no authentication; a public deployment
+still needs TLS, authentication, rate limits, and deployment-level request
+limits.
 
 ## Gradio
 
@@ -61,14 +75,15 @@ python app.py
 ```
 
 The root `app.py` remains the Hugging Face Spaces entry point. The actual UI
-lives at `apps/gradio/app.py`; the core package never imports Gradio.
+lives at `apps/gradio/app.py` and imports `python_api`.
 
-## Adding Swift
+## Swift
 
-A Swift interface should call the same transcription contract through a small
-HTTP or WebSocket adapter. This preserves a single Python preprocessing and
-decoding implementation while iOS and macOS own capture and presentation.
+Swift calls the HTTP API; it does not embed the Python API:
 
-On-device Swift inference is a separate track. It requires exporting the visual
-frontend, Conformer, and decoder to an Apple-supported runtime and porting the
-mouth-alignment preprocessing pipeline.
+```text
+Swift ──HTTP──► http_api ──direct call──► python_api ──► engine
+```
+
+On-device Swift inference remains a separate track requiring model export and a
+native port of mouth-alignment preprocessing.

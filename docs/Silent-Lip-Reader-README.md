@@ -66,11 +66,11 @@ upload, preprocessing, training, checkpoint download, and evaluation commands.
 
 ## Interface architecture
 
-The inference service is now independent of Gradio. `silent_speech/core` owns
-configuration, lazy model loading, and transcription; `silent_speech/interfaces`
-contains optional UI adapters. The existing `python app.py` command remains
-compatible, while future HTTP, Swift, or other clients can reuse the same core
-service without importing Gradio.
+The inference service is independent of Gradio. `apis/python_api` owns
+configuration, lazy model loading, and transcription. `apps/gradio` and
+`apis/http_api` are separate adapters over that direct Python interface. The
+existing `python app.py` command remains compatible, while Swift and other
+non-Python clients can use the HTTP API without importing Gradio.
 
 See **[docs/interface-architecture.md](docs/interface-architecture.md)** for the
 package layout, core API, dependency split, and Swift integration path.

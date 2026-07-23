@@ -32,7 +32,7 @@ image = (
         "torchaudio==2.6.0",
         "pytorch-lightning==2.6.5",
         "mediapipe==0.10.21",
-        "opencv-python-headless==4.11.0.86",
+        "opencv-contrib-python==4.10.0.84",
         "numpy<2",
         "Pillow",
         "sentencepiece",

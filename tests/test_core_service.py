@@ -1,7 +1,7 @@
 import unittest
 
-from silent_speech.core import RuntimeConfig, SilentSpeechService
-from silent_speech.core.service import _find_project_root
+from python_api.core import RuntimeConfig, SilentSpeechService
+from python_api.core.service import _find_project_root
 
 
 class FakeReader:

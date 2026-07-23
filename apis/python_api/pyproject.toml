@@ -3,9 +3,9 @@ requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "open-altergo-silent-speech"
+name = "python-api"
 version = "0.1.0"
-description = "Interface-neutral silent-speech service for Open-Altergo"
+description = "In-process Python API for Open-Altergo"
 readme = "README.md"
 requires-python = ">=3.11"
 

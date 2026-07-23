@@ -13,4 +13,4 @@ where = ["src"]
 namespaces = true
 
 [tool.setuptools.package-data]
-open_altergo_engine = ["**/*.npy"]
+open_altergo_engine = ["*.json", "**/*.npy"]

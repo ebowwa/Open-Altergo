@@ -1,12 +1,12 @@
 --extra-index-url https://download.pytorch.org/whl/cpu
 -e cloud/engine
--e packages/silent_speech
+-e apis/python_api
 torch==2.6.0
 torchvision==0.21.0
 torchaudio==2.6.0
 pytorch-lightning>=2.0.0
+opencv-contrib-python==4.10.0.84
 mediapipe==0.10.21
-opencv-python-headless
 numpy<2
 Pillow
 sentencepiece
