@@ -7,7 +7,9 @@ apps/gradio/
     app.py
 apis/python_api/
     pyproject.toml
-    src/python_api/
+    src/
+        __init__.py
+        core/
 apis/http_api/
     app.py
 cloud/engine/

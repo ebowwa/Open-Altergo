@@ -9,5 +9,6 @@ description = "In-process Python API for Open-Altergo"
 readme = "README.md"
 requires-python = ">=3.11"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+packages = ["python_api", "python_api.core"]
+package-dir = {python_api = "src", "python_api.core" = "src/core"}

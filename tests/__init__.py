@@ -7,7 +7,6 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SOURCE_ROOTS = (
-    PROJECT_ROOT / "apis" / "python_api" / "src",
     PROJECT_ROOT / "cloud" / "engine" / "src",
 )
 for source_root in SOURCE_ROOTS:

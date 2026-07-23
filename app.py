@@ -1,14 +1,6 @@
 """Hugging Face Spaces-compatible launcher for the Gradio application."""
 
-import sys
-from pathlib import Path
-
-
-PACKAGE_SRC = Path(__file__).resolve().parent / "apis" / "python_api" / "src"
-if str(PACKAGE_SRC) not in sys.path:
-    sys.path.insert(0, str(PACKAGE_SRC))
-
-from apps.gradio.app import build_app, demo, main, run  # noqa: E402
+from apps.gradio.app import build_app, demo, main, run
 
 __all__ = ["build_app", "demo", "main", "run"]
 
