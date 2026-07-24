@@ -35,5 +35,7 @@ saved_model/**/* filter=lfs diff=lfs merge=lfs -text
 *tfevents* filter=lfs diff=lfs merge=lfs -text
 
 # Required runtime geometry is tiny and must remain cloneable without LFS.
+cloud/engine/src/preparation/detectors/mediapipe/20words_mean_face.npy -filter -diff -merge -text
+cloud/engine/src/preparation/detectors/retinaface/20words_mean_face.npy -filter -diff -merge -text
 cloud/engine/src/open_altergo_engine/preparation/detectors/mediapipe/20words_mean_face.npy -filter -diff -merge -text
 cloud/engine/src/open_altergo_engine/preparation/detectors/retinaface/20words_mean_face.npy -filter -diff -merge -text
